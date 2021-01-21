@@ -1,0 +1,27 @@
+name: publish to nuget
+on:
+  push:
+    branches:
+      - main # Default release branch
+jobs:
+  publish:
+    name: build, pack & publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2     
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: '5.0.101'
+      - name: Install dependencies
+        run: dotnet restore
+      - name: Build
+        run: dotnet build --configuration Release --no-restore      
+      - name: Publish on version change
+        id: publish_nuget
+        uses: rohith/publish-nuget@v2
+        with:          
+          PROJECT_FILE_PATH: harbor.csproj
+          VERSION_REGEX: '^\s*<PackageVersion>(.*)<\/PackageVersion>\s*$'
+          TAG_FORMAT: '*'
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}       
