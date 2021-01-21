@@ -93,3 +93,8 @@ harbor log {container_id}
 # How to Contribute
 
 Feel free to contribute with pull requests, bug reports or enhancement suggestions. We love PR's
+
+# Future plan
+
+- Add support for Mac and Linux
+- Add additional services
