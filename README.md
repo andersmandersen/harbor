@@ -38,7 +38,7 @@ harbor enable mysql
 Disable a giving service. And will delete all related data to the service. Note this action can't be reserved. If you whise to stop a service. See [Stop service]
 
 ```bash
-harbor stop {container_id}
+harbor disable {container_id}
 ```
 
 ### Disable all services
