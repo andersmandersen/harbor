@@ -74,6 +74,7 @@ namespace harbor.Helpers
             Console.ForegroundColor = ConsoleColor.White;       
             Console.WriteLine("\n" + Message);
             Console.ResetColor();            
+            Console.WriteLine();                       
         }
 
         /// <summary>
@@ -85,9 +86,10 @@ namespace harbor.Helpers
         {
             Console.ResetColor();     
             Console.BackgroundColor = ConsoleColor.Green;
-            Console.ForegroundColor = ConsoleColor.White;       
+            Console.ForegroundColor = ConsoleColor.White;                   
             Console.WriteLine("\n" + Message);
             Console.ResetColor();            
+            Console.WriteLine();          
         }
 
         /// <summary>
