@@ -63,6 +63,34 @@ namespace harbor.Helpers
         }
 
         /// <summary>
+        /// Print error message to user
+        /// </summary>
+        /// <param name="Message"></param>
+        /// <returns></returns>
+        public static void PrintError(string Message)
+        {
+            Console.ResetColor();     
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.ForegroundColor = ConsoleColor.White;       
+            Console.WriteLine("\n" + Message);
+            Console.ResetColor();            
+        }
+
+        /// <summary>
+        /// Print success message to user
+        /// </summary>
+        /// <param name="Message"></param>
+        /// <returns></returns>
+        public static void PrintSuccess(string Message)
+        {
+            Console.ResetColor();     
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.White;       
+            Console.WriteLine("\n" + Message);
+            Console.ResetColor();            
+        }
+
+        /// <summary>
         /// Ask the user to confirm a action
         /// </summary>
         /// <param name="Message"></param>

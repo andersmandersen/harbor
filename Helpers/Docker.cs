@@ -19,13 +19,17 @@ namespace harbor.Shell
         /// <param name="container_name"></param>
         public async Task BootContainerAsync(string command, string container_name)
         {
-            ConsoleHelper.PrintInfo("Enabling service....");
+            var exitingContainers = await this.GetContainersAsync();
+            if (exitingContainers.ContainsValue(container_name)) {
+                ConsoleHelper.PrintError("A service with the inputted options are alredy exiting. Run 'harbor list' to display existing services.");  
+                Environment.Exit(0);
+            }
 
-            //Console.WriteLine(string.Format("run -d --name {0} {1}", container_name, command));
+            ConsoleHelper.PrintInfo("Enabling service....");            
             
             var result = await Cli.Wrap("docker").WithArguments(string.Format("run -d --name {0} {1}", container_name, command)).ExecuteBufferedAsync();    
 
-            ConsoleHelper.PrintInfo("Service has been enabled and started!");
+            ConsoleHelper.PrintSuccess("Service has been enabled and started!");
         }
 
         /// <summary>

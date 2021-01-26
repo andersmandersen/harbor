@@ -22,7 +22,7 @@ namespace harbor.Commands
         public async Task HandleAsync(string[] args)
         {
             if (args.Length <= 1) {
-                ConsoleHelper.PrintInfo("Please pass a service name.");
+                ConsoleHelper.PrintError("Please pass a service name.");
                 return;
             }
 
@@ -31,7 +31,7 @@ namespace harbor.Commands
             // Verfiy the service exist     
             string argService = args[1];
             if (!services.Contains(argService.ToLower())) {
-                ConsoleHelper.PrintInfo("We wasn't able to find the service.");
+                ConsoleHelper.PrintError("We wasn't able to find the service.");
                 Environment.Exit(0);
             }
             
@@ -51,7 +51,7 @@ namespace harbor.Commands
                     await serviceRedis.EnableAsync();
                     break;
                 default:
-                    ConsoleHelper.PrintInfo("We wasn't able to find the service.");
+                    ConsoleHelper.PrintError("We wasn't able to find the service.");
                     Environment.Exit(0);
                     break;
             }

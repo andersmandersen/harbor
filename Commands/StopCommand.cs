@@ -15,7 +15,7 @@ namespace harbor.Commands
         public async Task HandleAsync(string[] args)
         {        
             if (args.Length <= 1) {
-                ConsoleHelper.PrintInfo("Please pass a valid container ID. Or use the --all flag");
+                ConsoleHelper.PrintError("Please pass a valid container ID. Or use the --all flag");
                 return;
             }
 
@@ -29,7 +29,7 @@ namespace harbor.Commands
 
             string container_id = args[1];
             if (!containers.ContainsKey(container_id)) {
-                ConsoleHelper.PrintInfo("Please pass a valid container ID.");
+                ConsoleHelper.PrintError("Please pass a valid container ID.");
                 return;
             }
 
@@ -44,7 +44,7 @@ namespace harbor.Commands
         private async Task StopSingle(string container_id)
         {
             await this._docker.StopAsync(container_id);
-            ConsoleHelper.PrintInfo("The service has been stopped!");
+            ConsoleHelper.PrintSuccess("The service has been stopped!");
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace harbor.Commands
                 await this._docker.StopAsync(container.Key);
             }
 
-            ConsoleHelper.PrintInfo("All services has been stopped!");
+            ConsoleHelper.PrintSuccess("All services has been stopped!");
         }
     }
 }
