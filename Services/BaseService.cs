@@ -89,7 +89,11 @@ namespace harbor.Services
         /// <returns></returns>
         private string ContainerName()
         {
-            return "HARBOR-" + this.DisplayName + "-" + this.Tag;
+            string name = "HARBOR-" + this.DisplayName + "-" + this.Tag;
+            if (this.Responses.ContainsKey("port")) {
+                name = name + "-" + this.Responses["port"];
+            }
+            return name;
         }
     }
 }
