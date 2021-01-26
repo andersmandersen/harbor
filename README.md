@@ -96,6 +96,5 @@ Feel free to contribute with pull requests, bug reports or enhancement suggestio
 
 # Future plan
 
-- Add better error handling
 - Add support for Mac and Linux
 - Add additional services
