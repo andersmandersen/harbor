@@ -25,9 +25,10 @@ namespace harbor.Commands
             Console.WriteLine("\tlist                \tList all enabled services. Will provide you with the container id used for start/stopping a service");
 
             Console.WriteLine("\nServices:");            
-            foreach(var service in this.servicesCollector.GetServices()) {
-                Console.WriteLine($"\t{service}");
-            }            
+            Console.WriteLine($"\tmeilisearch");
+            Console.WriteLine($"\tmssql");
+            Console.WriteLine($"\tmysql");
+            Console.WriteLine($"\tredis");            
         }
     }
 }

@@ -50,6 +50,10 @@ namespace harbor.Commands
                     var serviceRedis = new Redis();
                     await serviceRedis.EnableAsync();
                     break;
+                case "meilisearch":                    
+                    var serviceMeiliSearch = new MeiliSearch();
+                    await serviceMeiliSearch.EnableAsync();
+                    break;
                 default:
                     ConsoleHelper.PrintError("We wasn't able to find the service.");
                     Environment.Exit(0);
