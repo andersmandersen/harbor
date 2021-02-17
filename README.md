@@ -1,4 +1,4 @@
-![Harbor - Easy Docker Containers](banner.png?version=1)
+![Harbor - Easy Docker Containers](https://raw.githubusercontent.com/andersmandersen/harbor/main/banner.png)
 
 [![Version](https://img.shields.io/nuget/v/harbor)](https://www.nuget.org/packages/harbor/)
 
