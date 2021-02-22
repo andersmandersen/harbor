@@ -25,7 +25,7 @@ namespace harbor.Shell
                 Environment.Exit(0);
             }
 
-            ConsoleHelper.PrintInfo("Enabling service....");            
+            ConsoleHelper.PrintInfo("Enabling service....");                        
             
             var result = await Cli.Wrap("docker").WithArguments(string.Format("run -d --name {0} {1}", container_name, command)).ExecuteBufferedAsync();    
 
@@ -39,7 +39,13 @@ namespace harbor.Shell
         /// <returns></returns>
         public async Task DestroyAsync(string container_id)
         {
-            var result = await Cli.Wrap("docker").WithArguments($"rm --force -v {container_id}").ExecuteBufferedAsync();            
+            string volumne_name = await this.GetContainerVolumne(container_id);
+            
+            var result = await Cli.Wrap("docker").WithArguments($"rm --force -v {container_id}").ExecuteBufferedAsync();    
+                
+            if (volumne_name != "") {
+                await this.RemoveVolumne(volumne_name);
+            }    
         }
 
         /// <summary>
@@ -50,6 +56,16 @@ namespace harbor.Shell
         public async Task StopAsync(string container_id)
         {
             var result = await Cli.Wrap("docker").WithArguments($"stop {container_id}").ExecuteBufferedAsync();   
+        }
+
+        /// <summary>
+        /// Remove volumne
+        /// </summary>
+        /// <param name="volumn_name"></param>
+        /// <returns></returns>
+        public async Task RemoveVolumne(string volumn_name)
+        {
+            var result = await Cli.Wrap("docker").WithArguments($"volume rm {volumn_name}").ExecuteBufferedAsync();   
         }
 
         /// <summary>
@@ -119,5 +135,16 @@ namespace harbor.Shell
             }
             return list;
         } 
+
+        /// <summary>
+        /// Grab container volumne
+        /// </summary>
+        /// <param name="container_id"></param>
+        /// <returns></returns>
+        public async Task<string> GetContainerVolumne(string container_id)
+        {
+            var result = await Cli.Wrap("docker").WithArguments("inspect -f \"{{ (index .Mounts 0).Name }}\" " + container_id).ExecuteBufferedAsync();
+            return result.StandardOutput.Split("\n")[0];
+        }
     }
 }
